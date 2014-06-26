@@ -17,9 +17,9 @@ for my $opt (@menu) {
     ++$opts if $option;
 }
 
-is($opts, 1, 'Correct number of options for worldcup matches');
+is($opts, 2, 'Correct number of options for worldcup matches');
 
-my $result = system([0..5], "bin/worldcup matches -o $file");
+my $result = system([0..5], "bin/worldcup matches -d -o $file");
 
 ok(-e $file, 'Successfully fetched information for World Cup matches');
 

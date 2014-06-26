@@ -9,6 +9,7 @@ use Test::More tests => 2;
 my @menu = capture([0..5], "bin/worldcup help today");
 my $file = "t/wctoday";
 my $opts = 0;
+my $skip = 0;
 
 for my $opt (@menu) {
     next if $opt =~ /^worldcup|^ *$/;

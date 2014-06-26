@@ -1,0 +1,12 @@
+Makefile.PL
+LICENSE
+Changes
+README.md
+cpanfile
+bin/worldcup
+lib/WorldCup.pm
+t/00-load.t
+t/01-matches.t
+xt/pod.t
+xt/pod-coverage.t
+

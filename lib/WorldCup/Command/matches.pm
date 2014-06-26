@@ -26,7 +26,7 @@ sub validate_args {
 	system([0..5], "perldoc $command");
     }
     else {
-	$self->usage_error("Too many arguments.") if @$args;
+	$self->usage_error("Too few arguments.") unless @$args || $opt->{datetime};
     }
 } 
 
@@ -62,18 +62,9 @@ sub _fetch_matches {
 
     my $matches = decode_json($response->content);
 
-    #dd $matches;
-
-    printf $out "%14s %s %s ", "HOME", "  ", " AWAY";
-    print $out "(";
-    print $out colored( sprintf("%s ", 'Win'), 'yellow');
-    print $out colored( sprintf("%s ", 'Loss'), 'red');
-    print $out colored( sprintf("%s", 'Draw'), 'magenta');
-    print $out ")\n";
-
     if ($datetime) {
 	#my @sorted_matches = sort {
-	    #next unless defined $_->{datetime};
+	#next unless defined $_->{datetime};
 	    #my ($datea, $timea) = ($_->{datetime} =~ /(\d\d\d\d-\d\d-\d\d)T(\d\d):/);
 	    #my ($dateb, $timeb) = ($_->{datetime}{$b} =~ /(\d\d\d\d-\d\d-\d\d)T(\d\d):/);
 	    #my ($ya, $da, $ma) = split /-/, $datea;
@@ -89,34 +80,43 @@ sub _fetch_matches {
 
 	#my @sorted = sort { $a->{datetime} cmp $b->{datetime} } 
 	#             map  { $_->{datetime} =~ s/T.*// } @$matches; dd @sorted;
+
+	printf $out "%14s %s %s ", "HOME", "  ", " AWAY";
+	print $out "(";
+	print $out colored( sprintf("%s ", 'Win'), 'yellow');
+	print $out colored( sprintf("%s ", 'Loss'), 'red');
+	print $out colored( sprintf("%s", 'Draw'), 'magenta');
+	print $out ")\n";
+
 	my %timeh;
 	for my $match (@$matches) { 
 	    my ($year, $month, $day, $time) = $match->{datetime} =~ /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d:\d\d)/;
 	    #$timeh{$day.$time};
-	if ( $match->{status} eq "completed" ) {
-	    print colored("$month/$day, $time", 'bold underline'), "\n" unless exists $timeh{$month.$day.$time};
-	    $timeh{$month.$day.$time} = 1;
-	    if ($match->{home_team}{goals} > $match->{away_team}{goals}) {
-		print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'yellow');
-		printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
-		print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'red');
-
-	    }
-	    elsif ($match->{home_team}{goals} < $match->{away_team}{goals}) {
-		print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'red');
-                printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
-                print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'yellow');
-            }
-	    else {
-		print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'magenta');
-                printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
-                print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'magenta');
+	    if ( $match->{status} eq "completed" ) {
+		print colored("$month/$day, $time", 'bold underline'), "\n" unless exists $timeh{$month.$day.$time};
+		$timeh{$month.$day.$time} = 1;
+		if ($match->{home_team}{goals} > $match->{away_team}{goals}) {
+		    print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'yellow');
+		    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
+		    print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'red');
+		    
+		}
+		elsif ($match->{home_team}{goals} < $match->{away_team}{goals}) {
+		    print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'red');
+		    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
+		    print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'yellow');
+		}
+		else {
+		    print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'magenta');
+		    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
+		    print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'magenta');
+		}
 	    }
 	}
     }
-    }
     close $out;
 }
+
 1;
 __END__
 

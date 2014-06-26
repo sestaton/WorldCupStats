@@ -1,0 +1,18 @@
+#!/usr/bin/env perl
+
+use 5.012;
+use strict;
+use warnings;
+use WorldCup;
+
+our $VERSION = '0.01';
+
+WorldCup->run;
+
+=pod
+
+=head1 NAME
+
+worldcup - Command-line access to the World Cup match information
+
+=cut

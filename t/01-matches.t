@@ -23,4 +23,5 @@ my $result = system([0..5], "bin/worldcup matches -d -o $file");
 
 ok(-e $file, 'Successfully fetched information for World Cup matches');
 
+unlink $file;
 done_testing();

@@ -24,7 +24,7 @@ is($opts, 1, 'Correct number of options for worldcup group_results');
 
 my $result = system([0..5], "bin/worldcup group_results -o $file");
     
-ok(-e $file, 'Successfully fetched information for World Cup group resultss');
+ok(-e $file, 'Successfully fetched information for World Cup group results');
 
 open my $in, '<', $file;
 

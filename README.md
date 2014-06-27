@@ -34,6 +34,10 @@ Show the matches scheduled for the current day, with time and location but not s
 
     worldcup today
 
+Show the matches scheduled for the next day, with time and location:
+
+    worldcup tomorrow
+
 Get the results for each group:
 
     worldcup group_results

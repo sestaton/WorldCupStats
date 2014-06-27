@@ -58,16 +58,20 @@ sub _fetch_matches_today {
 
     my $matches = decode_json($response->content);
 
-    for my $match ( @{$matches} ) {
-	my ($year, $day, $month, $time) = ($match->{datetime} =~ /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d):/);
-	my $timestring = $month."/".$day." ".$time.":00";
-	print $out sprintf "%-14s -- %-12s %-20s %-20s\n", 
+    if ( @{$matches} ) {
+	for my $match ( @{$matches} ) {
+	    my ($year, $day, $month, $time) = ($match->{datetime} =~ /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d):/);
+	    my $timestring = $month."/".$day." ".$time.":00";
+	    print $out sprintf "%-14s -- %-12s %-20s %-20s\n", 
 	            $match->{home_team}{country}, 
                     $match->{away_team}{country},
 	            $match->{location}, 
 	            $timestring;
+	}
     }
-
+    else {
+	say "No matches scheduled today";
+    }
     close $out;
 }
 

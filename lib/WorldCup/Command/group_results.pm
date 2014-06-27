@@ -1,5 +1,5 @@
 package WorldCup::Command::group_results;
-# ABSTRACT: Returns the days matches
+# ABSTRACT: Returns the final match results for each group
 
 use 5.012;
 use strict;
@@ -8,11 +8,11 @@ use WorldCup -command;
 use JSON;
 use LWP::UserAgent;
 use File::Basename;
-use Data::Dump qw(dd);
+use Term::ANSIColor;
 
 sub opt_spec {
     return (    
-	[ "outfile|o=s",  "A file to place the current match data information" ],
+	[ "outfile|o=s",  "A file to place the group results information" ],
     );
 }
 
@@ -34,10 +34,10 @@ sub execute {
     exit(0) if $self->app->global_options->{man};
     my $outfile = $opt->{outfile};
 
-    my $result  = _fetch_matches_today($outfile);
+    my $result  = _fetch_group_results($outfile);
 }
 
-sub _fetch_matches_today {
+sub _fetch_group_results {
     my ($outfile) = @_;
 
     my $out;
@@ -59,18 +59,30 @@ sub _fetch_matches_today {
 
     my $matches = decode_json($response->content);
 
-    dd $matches;
+    my %groups_seen;
+    my $group_map = { '1' => 'A', '2' => 'B', '3' => 'C', '4' => 'D', 
+		      '5' => 'E', '6' => 'F', '7' => 'G', '8' => 'H' };
 
-    #for my $match ( @{$matches} ) {
-	#my ($year, $day, $month, $time) = ($match->{datetime} =~ /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d):/);
-	#my $timestring = $month."/".$day." ".$time.":00";
-	#print $out sprintf "%-14s -- %-12s %-20s %-20s\n", 
-	 #           $match->{home_team}{country}, 
-         #           $match->{away_team}{country},
-	 #           $match->{location}, 
-	 #           $timestring;
-    #}
+    for my $group ( sort { $a->{group_id} <=> $b->{group_id} } @{$matches} ) {
+	print $out "\n" unless exists $groups_seen{$group->{group_id}};
+	if (exists $group_map->{$group->{group_id}}) {
+	    my $group_id = $group_map->{$group->{group_id}};
+	    if ($outfile) {
+		say $out "Group $group_id                Wins Losses"
+		    unless exists $groups_seen{$group->{group_id}};
+	    }
+	    else {
+		print $out colored("Group $group_id                Wins Losses", 'bold underline'), "\n"
+                    unless exists $groups_seen{$group->{group_id}};
+	    }
+	    print $out sprintf "%-24s %-2d %-2d\n", 
+	               $group->{country}, 
+	               $group->{wins},
+	               $group->{losses};
 
+	    $groups_seen{$group->{group_id}}++;
+	}
+    }
     close $out;
 }
 
@@ -81,11 +93,11 @@ __END__
 
 =head1 NAME
                                                                        
- worldcup today - Get the matches scheduled to the current day
+ worldcup group_results - Get the final match results for each group
 
 =head1 SYNOPSIS    
 
- worldcup today -o wcmatches_today
+ worldcup group_results -o wcgroup_results
 
 =head1 DESCRIPTION
                                                                    

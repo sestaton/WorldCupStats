@@ -54,6 +54,10 @@ More information about each command is available by accessing the full documenta
 
 Report any issues at the WorldCup issue tracker: https://github.com/sestaton/WorldCup/issues
 
+**ATTRIBUTION**
+
+This tool uses the Soccer for Good API: http://softwareforgood.com/soccer-good/
+
 **LICENSE AND COPYRIGHT**
 
 Copyright (C) 2014 S. Evan Staton

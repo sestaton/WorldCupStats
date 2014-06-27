@@ -7,7 +7,7 @@ Command line access to latest World Cup results
 
 Perl version 5.10 (or greater) must be installed to use WorldCup, and there are a couple of external modules required. If you have [cpanminus](https://metacpan.org/pod/App::cpanminus), installation can be done with a single command:
 
-    cpanm git://github.com/sestaton/HMMER2GO.git
+    cpanm git://github.com/sestaton/WorldCup.git
 
 Alternatively, download the latest [release](https://github.com/sestaton/WorldCup/releases) and run the following command in the top directory:
 
@@ -22,18 +22,33 @@ If any Perl dependencies are listed after running this command, install them thr
 
 **BRIEF USAGE**
 
+Get a chronological listing of match results:
+
+    worldcup matches
+
+Show the current matches under way:
+
+    worldcup current
+
+Show the matches scheduled for the current day, with time and location but not scores (no spoilers!):
+
+    worldcup today
+
+Get the results for each group:
+
+    worldcup group_results
+
+For any of the above commands, you can add `-o file` to the command the results will be save to `file` in case you want to do some plotting or analysis with the results.
 
 **DOCUMENTATION**
 
 Each subcommand can be executed with no arguments to generate a help menu. Alternatively, you may specify help message explicitly. For example,
 
-    hmmer2go help search
+    worldcup help today
 
 More information about each command is available by accessing the full documentation at the command line. For example,
 
     worldcup today --man
-
-Also, the [WorldCup wiki](https://github.com/sestaton/WorldCup/wiki) is a source of online documentation.
 
 **ISSUES**
 

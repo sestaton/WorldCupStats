@@ -1,5 +1,5 @@
 package WorldCup::Command::today;
-# ABSTRACT: Returns the days matches
+# ABSTRACT: Returns the matches scheduled for the current day
 
 use 5.012;
 use strict;

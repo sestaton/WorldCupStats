@@ -1,5 +1,5 @@
 package WorldCup::Command::current;
-# ABSTRACT: Returns the days matches
+# ABSTRACT: Returns the matches currently in action
 
 use 5.012;
 use strict;
@@ -82,11 +82,11 @@ __END__
 
 =head1 NAME
                                                                        
- worldcup today - Get the matches scheduled to the current day
+ worldcup current - Get the matches currently in action
 
 =head1 SYNOPSIS    
 
- worldcup today -o wcmatches_today
+ worldcup current -o wcmatches_current
 
 =head1 DESCRIPTION
                                                                    

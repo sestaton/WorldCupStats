@@ -9,12 +9,10 @@ use JSON;
 use LWP::UserAgent;
 use File::Basename;
 use Term::ANSIColor;
-use Data::Dump qw(dd);
 
 sub opt_spec {
     return (    
 	[ "outfile|o=s",  "A file to place the match data information" ],
-	[ "datetime|d",   "Return output sorted by date and time"      ],
     );
 }
 
@@ -26,7 +24,7 @@ sub validate_args {
 	system([0..5], "perldoc $command");
     }
     else {
-	$self->usage_error("Too few arguments.") unless @$args || $opt->{datetime};
+	$self->usage_error("Too many arguments.") if @$args;
     }
 } 
 
@@ -62,54 +60,66 @@ sub _fetch_matches {
 
     my $matches = decode_json($response->content);
 
-    if ($datetime) {
-	#my @sorted_matches = sort {
-	#next unless defined $_->{datetime};
-	    #my ($datea, $timea) = ($_->{datetime} =~ /(\d\d\d\d-\d\d-\d\d)T(\d\d):/);
-	    #my ($dateb, $timeb) = ($_->{datetime}{$b} =~ /(\d\d\d\d-\d\d-\d\d)T(\d\d):/);
-	    #my ($ya, $da, $ma) = split /-/, $datea;
-	    #my ($yb, $db, $mb) = split /-/, $dateb;
-	    #$ya <=> $yb || $ma <=> $mb || $da <=> $db || $timea <=> $timeb;
-
-	#} @$matches;
-	#my @sorted_matches = map  { $_->[0] }
-	#                     sort { $a->[1] cmp $b->[1] }
-	#                     map  [ $_, join('', ($_->{datetime} =~ /(\d\d\d\d)-(\d\d)-(\d\d)T\d\d:/)[$1, $3, $2])
-	#		     ], @$matches;
-
-
-	#my @sorted = sort { $a->{datetime} cmp $b->{datetime} } 
-	#             map  { $_->{datetime} =~ s/T.*// } @$matches; dd @sorted;
-
-	printf $out "%14s %s %s ", "HOME", "  ", " AWAY";
-	print $out "(";
+    printf $out "%14s %s %s ", "HOME", "  ", " AWAY";
+    print $out "(";
+    if ($outfile) {
+	print $out sprintf("%s ", 'Win');
+	print $out sprintf("%s ", 'Loss');
+	print $out sprintf("%s", 'Draw');
+    }
+    else {
 	print $out colored( sprintf("%s ", 'Win'), 'yellow');
 	print $out colored( sprintf("%s ", 'Loss'), 'red');
 	print $out colored( sprintf("%s", 'Draw'), 'magenta');
-	print $out ")\n";
+    }
+    print $out ")\n";
+    
+    my %timeh;
+    for my $match (@$matches) { 
+	my ($year, $month, $day, $time) = $match->{datetime} =~ /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d:\d\d)/;
+	if ( $match->{status} eq "completed" ) {
+	    if ($outfile) {
+		print $out "$month/$day, $time\n" unless exists $timeh{$month.$day.$time};
+	    }
+	    else {
+		print $out colored("$month/$day, $time", 'bold underline'), "\n" unless exists $timeh{$month.$day.$time};
+	    }
+	    $timeh{$month.$day.$time} = 1;
 
-	my %timeh;
-	for my $match (@$matches) { 
-	    my ($year, $month, $day, $time) = $match->{datetime} =~ /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d:\d\d)/;
-	    #$timeh{$day.$time};
-	    if ( $match->{status} eq "completed" ) {
-		print colored("$month/$day, $time", 'bold underline'), "\n" unless exists $timeh{$month.$day.$time};
-		$timeh{$month.$day.$time} = 1;
-		if ($match->{home_team}{goals} > $match->{away_team}{goals}) {
-		    print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'yellow');
+	    if ($match->{home_team}{goals} > $match->{away_team}{goals}) {
+		if ($outfile) {
+		    print $out sprintf("%14s ", $match->{home_team}{country});
 		    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
-		    print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'red');
-		    
+		    print $out sprintf(" %s\n", $match->{away_team}{country});
 		}
-		elsif ($match->{home_team}{goals} < $match->{away_team}{goals}) {
-		    print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'red');
+		else {
+		    print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'yellow');
+                    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
+                    print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'red');
+		}
+	    }
+	    elsif ($match->{home_team}{goals} < $match->{away_team}{goals}) {
+		if ($outfile) {
+		    print $out sprintf("%14s ", $match->{home_team}{country});
 		    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
-		    print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'yellow');
+		    print $out sprintf(" %s\n", $match->{away_team}{country});
+		}
+		else {
+		    print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'red');
+                    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
+                    print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'yellow');
+		}
+	    }
+	    else {
+		if ($outfile) {
+		    print $out sprintf("%14s ", $match->{home_team}{country});
+		    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
+		    print $out sprintf(" %s\n", $match->{away_team}{country});
 		}
 		else {
 		    print $out colored( sprintf("%14s ", $match->{home_team}{country}), 'magenta');
-		    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
-		    print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'magenta');
+                    printf $out "%d:%d", $match->{home_team}{goals}, $match->{away_team}{goals};
+                    print $out colored( sprintf(" %s\n", $match->{away_team}{country}), 'magenta');
 		}
 	    }
 	}

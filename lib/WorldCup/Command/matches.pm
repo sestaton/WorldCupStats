@@ -1,7 +1,6 @@
 package WorldCup::Command::matches;
 # ABSTRACT: All match data, updated every minute.
 
-use 5.012;
 use strict;
 use warnings;
 use WorldCup -command;

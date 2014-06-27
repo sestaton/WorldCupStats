@@ -1,7 +1,6 @@
 package WorldCup::Command::teams;
-# ABSTRACT: Returns the teams in the World Cup
+# ABSTRACT: Returns the teams in the World Cup.
 
-use 5.012;
 use strict;
 use warnings;
 use WorldCup -command;
@@ -9,7 +8,6 @@ use JSON;
 use LWP::UserAgent;
 use File::Basename;
 use Term::ANSIColor;
-use Data::Dump qw(dd);
 use List::Util qw(max);
 
 sub opt_spec {
@@ -86,7 +84,6 @@ sub _fetch_teams {
 	    print $out $header, "\n";
 	}
 	else {
-	    my $header = pack("A$len A*", "Group $groupid", "FIFA Code");
 	    print $out colored($header, 'bold underline'), "\n";
 	}
 

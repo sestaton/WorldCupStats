@@ -1,7 +1,6 @@
 package WorldCup::Command::current;
-# ABSTRACT: Returns the matches currently in action
+# ABSTRACT: Returns the matches currently in action.
 
-use 5.012;
 use strict;
 use warnings;
 use WorldCup -command;
@@ -69,7 +68,7 @@ sub _fetch_current_matches {
 	}
     }
     else {
-	say "No current matches, try the 'today' command to see if there are matches today.";
+	print "No current matches, try the 'today' command to see if there are matches today.\n";
     }
 
     close $out;

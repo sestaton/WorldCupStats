@@ -1,7 +1,6 @@
 package WorldCup::Command::tomorrow;
-# ABSTRACT: Returns the matches scheduled for the next day
+# ABSTRACT: Returns the matches scheduled for the next day.
 
-use 5.012;
 use strict;
 use warnings;
 use WorldCup -command;
@@ -70,7 +69,7 @@ sub _fetch_matches_tomorrow {
 	}
     }
     else {
-	say "No matches scheduled for tomorrow.";
+	print "No matches scheduled for tomorrow.\n";
     }
     close $out;
 }

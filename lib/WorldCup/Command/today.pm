@@ -11,7 +11,7 @@ use File::Basename;
 
 sub opt_spec {
     return (    
-	[ "outfile|o=s",  "A file to place the current match data information" ],
+	[ "outfile|o=s",  "A file to place the match information for the current day" ],
     );
 }
 
@@ -82,7 +82,7 @@ __END__
 
 =head1 NAME
                                                                        
- worldcup today - Get the matches scheduled to the current day
+ worldcup today - Get the matches scheduled for the current day
 
 =head1 SYNOPSIS    
 

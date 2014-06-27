@@ -42,6 +42,10 @@ Get the results for each group:
 
     worldcup group_results
 
+Get a listing of all the teams by group. This command displays the 3-letter FIFA code for each country, but not any scores:
+
+    worldcup teams
+
 For any of the above commands, you can add `-o file` to the command the results will be saved to `file` in case you want to do some plotting or analysis with the results.
 
 **DOCUMENTATION**

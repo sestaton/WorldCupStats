@@ -5,7 +5,7 @@ Command line access to latest World Cup results
 
 **INSTALLATION**
 
-Perl version 5.10 (or greater) must be installed to use WorldCup, and there are a couple of external modules required. If you have [cpanminus](https://metacpan.org/pod/App::cpanminus), installation can be done with a single command:
+Perl must be installed to use WorldCup, and there are a couple of external modules required. If you have [cpanminus](https://metacpan.org/pod/App::cpanminus), installation can be done with a single command:
 
     cpanm git://github.com/sestaton/WorldCup.git
 

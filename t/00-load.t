@@ -1,6 +1,5 @@
 #!/usr/bin/env perl
 
-use 5.012;
 use strict;
 use warnings FATAL => 'all';
 use IPC::System::Simple qw(capture);
@@ -25,6 +24,6 @@ for my $command (@menu) {
     ++$progs if $prog;
 }
 
-is ($progs, 7, 'Correct number of subcommands listed');
+is ($progs, 8, 'Correct number of subcommands listed');
 
 done_testing();

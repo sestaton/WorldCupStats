@@ -3,6 +3,8 @@ WorldCup
 
 Command line access to the latest World Cup results
 
+[![Build Status](https://travis-ci.org/sestaton/WorldCup.svg?branch=master)](https://travis-ci.org/sestaton/WorldCup)
+
 **INSTALLATION**
 
 Perl must be installed to use WorldCup, and there are a couple of external modules required. If you have [cpanminus](https://metacpan.org/pod/App::cpanminus), installation can be done with a single command:

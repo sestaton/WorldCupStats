@@ -1,7 +1,6 @@
 package WorldCup::Command::group_results;
-# ABSTRACT: Returns the final match results for each group
+# ABSTRACT: Returns the final match results for each group.
 
-use 5.012;
 use strict;
 use warnings;
 use WorldCup -command;
@@ -9,6 +8,7 @@ use JSON;
 use LWP::UserAgent;
 use File::Basename;
 use Term::ANSIColor;
+use List::Util qw(max);
 
 sub opt_spec {
     return (    
@@ -63,23 +63,24 @@ sub _fetch_group_results {
     my $group_map = { '1' => 'A', '2' => 'B', '3' => 'C', '4' => 'D', 
 		      '5' => 'E', '6' => 'F', '7' => 'G', '8' => 'H' };
 
+    my @teamlens = map { length($_->{country}) } @{$matches};
+    my $len = max(@teamlens) + 2;
+
     for my $group ( sort { $a->{group_id} <=> $b->{group_id} } @{$matches} ) {
 	print $out "\n" unless exists $groups_seen{$group->{group_id}};
 	if (exists $group_map->{$group->{group_id}}) {
 	    my $group_id = $group_map->{$group->{group_id}};
+	    my $header = pack("A$len A*", "Group $group_id", "Wins Losses");
 	    if ($outfile) {
-		say $out "Group $group_id                Wins Losses"
+		print $out $header, "\n" 
 		    unless exists $groups_seen{$group->{group_id}};
 	    }
 	    else {
-		print $out colored("Group $group_id                Wins Losses", 'bold underline'), "\n"
-                    unless exists $groups_seen{$group->{group_id}};
+		print $out colored($header, 'bold underline'), "\n"
+		    unless exists $groups_seen{$group->{group_id}};
 	    }
-	    print $out sprintf "%-24s %-2d %-2d\n", 
-	               $group->{country}, 
-	               $group->{wins},
-	               $group->{losses};
 
+	    print $out pack("A$len A5 A*", $group->{country}, $group->{wins}, $group->{losses}), "\n";
 	    $groups_seen{$group->{group_id}}++;
 	}
     }

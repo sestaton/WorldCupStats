@@ -18,7 +18,7 @@ for my $opt (@menu) {
     ++$opts if $option;
 }
 
-is($opts, 1, 'Correct number of options for worldcup matches');
+is($opts, 1, 'Correct number of options for worldcup today');
 
 SKIP: {
     skip 'skip checking matches scheduled for current day', 1 unless $skip;

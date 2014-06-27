@@ -1,7 +1,7 @@
 WorldCup
 ========
 
-Command line access to latest World Cup results
+Command line access to the latest World Cup results
 
 **INSTALLATION**
 

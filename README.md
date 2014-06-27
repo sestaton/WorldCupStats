@@ -38,7 +38,7 @@ Get the results for each group:
 
     worldcup group_results
 
-For any of the above commands, you can add `-o file` to the command the results will be save to `file` in case you want to do some plotting or analysis with the results.
+For any of the above commands, you can add `-o file` to the command the results will be saved to `file` in case you want to do some plotting or analysis with the results.
 
 **DOCUMENTATION**
 

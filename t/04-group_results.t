@@ -17,7 +17,7 @@ for my $opt (@menu) {
     next if $opt =~ /^worldcup|^ *$/;
     $opt =~ s/^\s+//;
     my ($option, $desc) = split /\s+/, $opt;
-    ++$opts if $option;
+    ++$opts if $option =~ /^-/;
 }
 
 is($opts, 1, 'Correct number of options for worldcup group_results');

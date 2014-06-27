@@ -70,7 +70,7 @@ sub _fetch_matches_today {
 	}
     }
     else {
-	say "No matches scheduled today";
+	say "No matches scheduled today.";
     }
     close $out;
 }

@@ -11,6 +11,7 @@ use File::Basename;
 sub opt_spec {
     return (    
 	[ "outfile|o=s",  "A file to place the current match data information" ],
+        [ "score|s",      "Provide the current score of the matches, along with progress" ],
     );
 }
 
@@ -30,13 +31,14 @@ sub execute {
     my ($self, $opt, $args) = @_;
 
     exit(0) if $self->app->global_options->{man};
-    my $outfile = $opt->{outfile};
+    my $outfile    = $opt->{outfile};
+    my $show_score = $opt->{score};
 
-    my $result  = _fetch_current_matches($outfile);
+    my $result  = _fetch_current_matches($outfile, $show_score);
 }
 
 sub _fetch_current_matches {
-    my ($outfile) = @_;
+    my ($outfile, $show_score) = @_;
 
     my $out;
     if ($outfile) {
@@ -61,9 +63,11 @@ sub _fetch_current_matches {
 	for my $match ( @{$matches} ) {
 	    if ($match->{home_team}{country}) {
 		my ($time) = $match->{datetime} =~ /\d\d\d\d-\d\d-\d\dT(\d\d:\d\d)/;
+		my $score = $match->{home_team}{goals}.":".$match->{away_team}{goals};
+		$score = $show_score ? $score : "vs.";
 		print $out sprintf "%-14s %-5s %-12s %-20s %-24s\n", 
 		      $match->{home_team}{country}, 
-		      "vs.",
+		      $score,
 		      $match->{away_team}{country},
 	              $match->{location},
 		      $time;
@@ -92,6 +96,8 @@ __END__
 
 =head1 DESCRIPTION
                                                                    
+ Show the current matches under way, along with the location and start time of the match.
+ By default, the scores are not shown, but they may be shown optionally.
 
 =head1 AUTHOR 
 
@@ -110,6 +116,10 @@ A file to place the World Cup match information
 =head1 OPTIONS
 
 =over 2
+
+=item -s, --score
+
+Show the current score of the matches (Default: False).
 
 =item -h, --help
 

@@ -17,7 +17,7 @@ for my $opt (@menu) {
     ++$opts if $option =~ /^-/;
 }
 
-is($opts, 1, 'Correct number of options for worldcup current');
+is($opts, 2, 'Correct number of options for worldcup current');
 
 SKIP: {
     skip 'skip checking current matches', 1 unless $skip;

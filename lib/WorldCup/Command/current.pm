@@ -60,10 +60,13 @@ sub _fetch_current_matches {
     if ( @{$matches} ) {
 	for my $match ( @{$matches} ) {
 	    if ($match->{home_team}{country}) {
-		print $out sprintf "%-14s -- %-12s %-20s\n", 
+		my ($time) = $match->{datetime} =~ /\d\d\d\d-\d\d-\d\dT(\d\d:\d\d)/;
+		print $out sprintf "%-14s %-5s %-12s %-20s %-24s\n", 
 		      $match->{home_team}{country}, 
+		      "vs.",
 		      $match->{away_team}{country},
-	              $match->{location};
+	              $match->{location},
+		      $time;
 	    }
 	}
     }

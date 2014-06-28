@@ -73,7 +73,8 @@ Print the full documentation for a command (e.g., worldcup today --man).
 
 =back 
 
-=head1 AUTHOR                                                                                                                                                                     
+=head1 AUTHOR
+
 S. Evan Staton, C<< <statonse at gmail.com> >>
 
 =head1 BUGS

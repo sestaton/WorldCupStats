@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use WorldCup;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 WorldCup->run;
 
@@ -12,6 +12,110 @@ WorldCup->run;
 
 =head1 NAME
 
-worldcup - Command-line access to the World Cup match information
+worldcup - Command-line access to World Cup match results
+
+=head1 SYNOPSIS
+
+    ## Get a chronological listing of match results (not shown to avoid spoilers):
+
+    $ worldcup matches
+
+    ##Show the current matches under way, without providing results:
+
+    $ worldcup current
+    Brazil         vs.   Chile        Estadio Mineirao     13:00
+
+    ## Show the matches scheduled for the current day, with time and location but not scores (no spoilers!):
+
+    $ worldcup today
+    Brazil         vs.   Chile        Estadio Mineirao     28/06 13:00         
+    Colombia       vs.   Uruguay      Estadio do Maracana  28/06 17:00
+
+    ## Show the matches scheduled for the next day, with time and location:
+
+    $ worldcup tomorrow
+    Netherlands    vs.   Mexico       Estadio Castelao     29/06 13:00         
+    Costa Rica     vs.   Greece       Arena Pernambuco     29/06 17:00
+
+    ## Get the results for each group (not shown to avoid spoilers):
+
+    $ worldcup group_results
+
+    ## Get a listing of all the teams by group. This command displays the 3-letter FIFA code for each country, 
+    ## but not any scores (just showing the first group below):
+
+    $ worldcup teams | head -5
+    Group A                 FIFA Code
+    Brazil                  BRA
+    Croatia                 CRO
+    Cameroon                CMR
+    Mexico                  MEX
+
+=head1 DESCRIPTION
+                                                                   
+ Retrieve the latest World Cup results for the current matches, the matches of the present day, 
+ the results from the group stage, or the matches planned for the next day. By default, scores are not shown 
+ except for the 'worldcup matches' and 'worldcup group_results' commands, which should allow one to check on 
+ the mathces without finding out the results. For all commands, the results may be written to a file for analysis 
+ or plotting.
+
+=head1 OPTIONS
+
+=over 2
+
+=item -h, --help
+
+Print a usage statement for a command (e.g., worldcup help today).
+
+=item -m, --man
+
+Print the full documentation for a command (e.g., worldcup today --man).
+
+=back 
+
+=head1 AUTHOR                                                                                                                                                                     
+S. Evan Staton, C<< <statonse at gmail.com> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests through the project site at 
+L<https://github.com/sestaton/WorldCup/issues>. I will be notified,
+and there will be a record of the issue. Alternatively, I can also be 
+reached at the email address listed above to resolve any questions.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc worldcup
+
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2014 S. Evan Staton.
+
+This program is distributed under the MIT (X11) License:
+L<http://www.opensource.org/licenses/mit-license.php>
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
 
 =cut

@@ -33,8 +33,7 @@ sub execute {
     exit(0) if $self->app->global_options->{man};
     my $outfile    = $opt->{outfile};
     my $show_score = $opt->{score};
-
-    my $result  = _fetch_current_matches($outfile, $show_score);
+    my $result     = _fetch_current_matches($outfile, $show_score);
 }
 
 sub _fetch_current_matches {

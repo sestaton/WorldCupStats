@@ -11,6 +11,7 @@ use File::Basename;
 sub opt_spec {
     return (    
 	[ "outfile|o=s",  "A file to place the match information for the current day" ],
+	[ "score|s",      "Provide the current score of the matches, along with progress" ],
     );
 }
 
@@ -30,13 +31,13 @@ sub execute {
     my ($self, $opt, $args) = @_;
 
     exit(0) if $self->app->global_options->{man};
-    my $outfile = $opt->{outfile};
-
-    my $result  = _fetch_matches_today($outfile);
+    my $outfile    = $opt->{outfile};
+    my $show_score = $opt->{score};
+    my $result     = _fetch_matches_today($outfile, $show_score);
 }
 
 sub _fetch_matches_today {
-    my ($outfile) = @_;
+    my ($outfile, $show_score) = @_;
 
     my $out;
     if ($outfile) {
@@ -61,9 +62,11 @@ sub _fetch_matches_today {
 	for my $match ( @{$matches} ) {
 	    my ($year, $day, $month, $time) = ($match->{datetime} =~ /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d):/);
 	    my $timestring = $month."/".$day." ".$time.":00";
+	    my $score = $match->{home_team}{goals}.":".$match->{away_team}{goals};
+	    $score = $show_score ? $score : "vs.";
 	    print $out sprintf "%-14s %-5s %-12s %-20s %-20s\n", 
 	            $match->{home_team}{country}, 
-                    "vs.",
+                    $score,
                     $match->{away_team}{country},
 	            $match->{location}, 
 	            $timestring;
@@ -89,7 +92,9 @@ __END__
  worldcup today -o wcmatches_today
 
 =head1 DESCRIPTION
-                                                                   
+
+ Show the matches scheduled for the current day. By default, the scores are not shown but
+ the scores may be optionally shown.                                         
 
 =head1 AUTHOR 
 
@@ -108,6 +113,10 @@ A file to place the World Cup match information
 =head1 OPTIONS
 
 =over 2
+
+=item -s, --score
+
+ Show the scores for the matches (Default: False).
 
 =item -h, --help
 

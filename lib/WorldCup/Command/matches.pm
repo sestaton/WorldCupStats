@@ -141,6 +141,8 @@ __END__
 
 =head1 DESCRIPTION
                                                                    
+ Print the match results sorted by match time. By default, the results are displayed in color
+ for easy interpretation, though the results are not formatted if printing to a file.
 
 =head1 AUTHOR 
 

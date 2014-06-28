@@ -111,6 +111,9 @@ __END__
 
 =head1 DESCRIPTION
                                                                    
+ Print a table showing all teams in the World Cup, displayed by the group, along
+ with the 3-letter FIFA code for each team. The 3-letter FIFA code can be used
+ for getting metainformation about team results in the tournament.
 
 =head1 AUTHOR 
 

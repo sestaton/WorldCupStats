@@ -102,6 +102,9 @@ __END__
 
 =head1 DESCRIPTION
                                                                    
+ Show the group results for all teams, displayed by group. By default the output
+ is formatted as a table and the results are colored in the terminal, though if
+ printing to a file there is no text formatting applied.
 
 =head1 AUTHOR 
 

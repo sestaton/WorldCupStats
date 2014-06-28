@@ -90,6 +90,8 @@ __END__
 
 =head1 DESCRIPTION
                                                                    
+ Show the scheduled matches for the next day, if any. The match ups are displayed with
+ the scheduled match time (according to the user time zone) and location.
 
 =head1 AUTHOR 
 

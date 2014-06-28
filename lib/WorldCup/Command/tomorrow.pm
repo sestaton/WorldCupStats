@@ -61,9 +61,10 @@ sub _fetch_matches_tomorrow {
 	for my $match ( @{$matches} ) {
 	    my ($year, $day, $month, $time) = ($match->{datetime} =~ /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d):/);
 	    my $timestring = $month."/".$day." ".$time.":00";
-	    print $out sprintf "%-14s -- %-12s %-20s %-20s\n", 
+	    print $out sprintf "%-14s %-5s %-12s %-20s %-20s\n", 
 	            $match->{home_team}{country}, 
-                    $match->{away_team}{country},
+                    "vs.",
+	            $match->{away_team}{country},
 	            $match->{location}, 
 	            $timestring;
 	}

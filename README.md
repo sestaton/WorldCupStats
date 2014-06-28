@@ -24,29 +24,39 @@ If any Perl dependencies are listed after running this command, install them thr
 
 **BRIEF USAGE**
 
-Get a chronological listing of match results:
+Get a chronological listing of match results (not shown to avoid spoilers):
 
-    worldcup matches
+    $ worldcup matches
 
-Show the current matches under way:
+Show the current matches under way, without providing results:
 
-    worldcup current
+    $ worldcup current
+    Brazil         vs.   Chile        Estadio Mineirao     13:00
 
 Show the matches scheduled for the current day, with time and location but not scores (no spoilers!):
 
-    worldcup today
+    $ worldcup today
+    Brazil         vs.   Chile        Estadio Mineirao     28/06 13:00         
+    Colombia       vs.   Uruguay      Estadio do Maracana  28/06 17:00
 
 Show the matches scheduled for the next day, with time and location:
 
-    worldcup tomorrow
+    $ worldcup tomorrow
+    Netherlands    vs.   Mexico       Estadio Castelao     29/06 13:00         
+    Costa Rica     vs.   Greece       Arena Pernambuco     29/06 17:00
 
-Get the results for each group:
+Get the results for each group (not shown to avoid spoilers):
 
-    worldcup group_results
+    $ worldcup group_results
 
-Get a listing of all the teams by group. This command displays the 3-letter FIFA code for each country, but not any scores:
+Get a listing of all the teams by group. This command displays the 3-letter FIFA code for each country, but not any scores (just showing the first group below):
 
-    worldcup teams
+    $ worldcup teams | head -5
+    Group A                 FIFA Code
+    Brazil                  BRA
+    Croatia                 CRO
+    Cameroon                CMR
+    Mexico                  MEX
 
 For any of the above commands, you can add `-o file` to the command the results will be saved to `file` in case you want to do some plotting or analysis with the results.
 

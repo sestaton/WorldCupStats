@@ -3,7 +3,7 @@ WorldCupStats
 
 Command line access to the latest World Cup results
 
-[![Build Status](https://travis-ci.org/sestaton/WorldCup.svg?branch=master)](https://travis-ci.org/sestaton/WorldCup)
+
 
 **INSTALLATION**
 

@@ -72,11 +72,13 @@ More information about each command is available by accessing the full documenta
 
 **ISSUES**
 
-Report any issues at the WorldCupStats issue tracker: https://github.com/sestaton/WorldCupStats/issues
+Report any issues or feature requests at the WorldCupStats issue tracker: https://github.com/sestaton/WorldCupStats/issues
 
 **ATTRIBUTION**
 
-This tool uses the Soccer for Good API: http://softwareforgood.com/soccer-good/
+This project uses the Soccer for Good API: http://softwareforgood.com/soccer-good/
+
+The idea for this project came from a Perl script I saw posted on [reddit](http://www.reddit.com/r/perl/comments/28kt0s/world_cup_results_in_perl/) for getting World Cup match results.
 
 **LICENSE AND COPYRIGHT**
 

@@ -1,5 +1,5 @@
-WorldCup
-========
+WorldCupStats
+=============
 
 Command line access to the latest World Cup results
 
@@ -7,11 +7,11 @@ Command line access to the latest World Cup results
 
 **INSTALLATION**
 
-Perl must be installed to use WorldCup, and there are a couple of external modules required. If you have [cpanminus](https://metacpan.org/pod/App::cpanminus), installation can be done with a single command:
+Perl must be installed to use WorldCupStats, and there are a couple of external modules required. If you have [cpanminus](https://metacpan.org/pod/App::cpanminus), installation can be done with a single command:
 
-    cpanm git://github.com/sestaton/WorldCup.git
+    cpanm git://github.com/sestaton/WorldCupStats.git
 
-Alternatively, download the latest [release](https://github.com/sestaton/WorldCup/releases) and run the following command in the top directory:
+Alternatively, download the latest [release](https://github.com/sestaton/WorldCupStats/releases) and run the following command in the top directory:
 
     perl Makefile.PL
 
@@ -72,7 +72,7 @@ More information about each command is available by accessing the full documenta
 
 **ISSUES**
 
-Report any issues at the WorldCup issue tracker: https://github.com/sestaton/WorldCup/issues
+Report any issues at the WorldCupStats issue tracker: https://github.com/sestaton/WorldCupStats/issues
 
 **ATTRIBUTION**
 

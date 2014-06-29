@@ -41,7 +41,7 @@ S. Evan Staton, C<< <statonse at gmail.com> >>
 =head1 BUGS
 
 Please report any bugs or feature requests through the project site at 
-L<https://github.com/sestaton/WorldCup/issues>. I will be notified,
+L<https://github.com/sestaton/WorldCupStats/issues>. I will be notified,
 and there will be a record of the issue. Alternatively, I can also be 
 reached at the email address listed above to resolve any questions.
 

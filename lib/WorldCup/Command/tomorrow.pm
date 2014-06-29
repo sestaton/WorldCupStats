@@ -31,7 +31,6 @@ sub execute {
 
     exit(0) if $self->app->global_options->{man};
     my $outfile = $opt->{outfile};
-
     my $result  = _fetch_matches_tomorrow($outfile);
 }
 

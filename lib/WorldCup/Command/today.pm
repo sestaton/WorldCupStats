@@ -11,7 +11,7 @@ use File::Basename;
 sub opt_spec {
     return (    
 	[ "outfile|o=s",  "A file to place the match information for the current day" ],
-	[ "scores|s",      "Provide the current score of the matches, along with progress" ],
+	[ "scores|s",     "Provide the current score of the matches, along with progress" ],
     );
 }
 

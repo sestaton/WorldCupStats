@@ -1,6 +1,13 @@
 Revision history for HMMER2GO
 
 Version	Date	Location
+0.03	08.12/2014	Vancouver, BC
+
+- Remove 'today', 'current' and 'tomorrow' subcommands since the
+  World Cup is over.
+- Adjust Docs and tests to only focus on those commands that will
+  return the finished results.
+
 0.02	06/28/2014	Athens, GA
 
 - Add options to get scores of the 'today' and 'current' commands.

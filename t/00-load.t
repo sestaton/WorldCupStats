@@ -14,7 +14,7 @@ diag( "Testing WorldCup $WorldCup::VERSION, Perl $], $^X" );
 my $worldcup = "bin/worldcup";
 ok(-x $worldcup, 'Can execute worldcup');
 
-my @menu = capture([0..5], "bin/worldcup help");
+my @menu = capture([0..5], "perl -Iblib/lib bin/worldcup help");
 
 my $progs = 0;
 for my $command (@menu) {
@@ -24,6 +24,6 @@ for my $command (@menu) {
     ++$progs if $prog;
 }
 
-is ($progs, 8, 'Correct number of subcommands listed');
+is ($progs, 5, 'Correct number of subcommands listed');
 
 done_testing();

@@ -8,11 +8,11 @@ WorldCup - Command-line access to World Cup results
 
 =head1 VERSION
 
-Version 0.01
+Version 0.03
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 sub global_opt_spec {
     [ 'man' => "Get the manual entry for a command" ];

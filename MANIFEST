@@ -6,17 +6,13 @@ cpanfile
 bin/worldcup
 lib/WorldCup.pm
 lib/WorldCup/Command.pm
-lib/WorldCup/Command/current.pm
 lib/WorldCup/Command/group_results.pm
 lib/WorldCup/Command/matches.pm
-lib/WorldCup/Command/today.pm
-lib/WorldCup/Command/tomorrow.pm
+lib/WorldCup/Command/teams.pm
 t/00-load.t
 t/01-matches.t
-t/02-today.t
-t/03-current.t
-t/04-group_results.t
-t/05-tomorrow.t
+t/02-group_results.t
+t/03-teams.t
 xt/pod.t
 xt/pod-coverage.t
 

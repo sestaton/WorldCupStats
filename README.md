@@ -47,11 +47,11 @@ For any of the above commands, you can add `-o file` to the command the results 
 
 Each subcommand can be executed with no arguments to generate a help menu. Alternatively, you may specify help message explicitly. For example,
 
-    worldcup help today
+    worldcup help matches
 
 More information about each command is available by accessing the full documentation at the command line. For example,
 
-    worldcup today --man
+    worldcup matches --man
 
 **ISSUES**
 

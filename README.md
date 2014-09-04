@@ -1,7 +1,7 @@
 WorldCupStats
 =============
 
-Command line access to the latest World Cup results
+Command line access to World Cup results
 
 [![Build Status](https://travis-ci.org/sestaton/WorldCupStats.svg?branch=master)](https://travis-ci.org/sestaton/WorldCupStats)
 
@@ -40,6 +40,8 @@ Get a listing of all the teams by group. This command displays the 3-letter FIFA
     Croatia                 CRO
     Cameroon                CMR
     Mexico                  MEX
+
+The team codes can be used for getting metadata for each team and match, and an option to return this information will be added in future release.
 
 For any of the above commands, you can add `-o file` to the command the results will be saved to `file` in case you want to do some plotting or analysis with the results. For the `worldcup current` and `worldcup today` commands, the scores maybe optionally printing instead of "vs." by specifying the score option (e.g., `worldcup current --scores`).
 
